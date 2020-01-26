@@ -1,6 +1,7 @@
 package com.example.myapplicationa1
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,6 +30,8 @@ class MainActivity : AppCompatActivity() {
         button3.setOnClickListener(View.OnClickListener {
             val drawerLayout = drawer_layout
             drawerLayout.openDrawer(GravityCompat.START)
+            val toast = Toast.makeText(applicationContext, "Open Drawer", Toast.LENGTH_SHORT)
+            toast.show()
         })
 
     }
