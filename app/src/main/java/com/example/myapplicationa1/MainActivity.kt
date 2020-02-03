@@ -1,59 +1,33 @@
 package com.example.myapplicationa1
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
-
-    // Initializing an empty ArrayList to be filled with name
-    private val list: ArrayList<String> = ArrayList()
-
+class MainActivity : AppCompatActivity(),TestRecyclerClickListener {
+    private val listItem: ArrayList<String> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val button3 = button3
-        addList()
+        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+        val listItem= arrayListOf(" Name","Family","Gender","Nationality","Setting","....","....","....","....","....")
 
-        // Creates a vertical Layout Manager
-        rv_name_list.layoutManager = LinearLayoutManager(this)
-//        rv_name_list.layoutManager = GridLayoutManager(this, 2)
-
-        // Access the RecyclerView Adapter and load the data into it
-        rv_name_list.adapter = ListAdapter(list, this)
-
-        button3.setOnClickListener(View.OnClickListener {
-            val drawerLayout = drawer_layout
+        recycler.layoutManager = LinearLayoutManager(this)
+        val adapter=ListAdapter(listItem,this)
+        recycler.adapter=adapter
+//        val button1 = button1
+        button1.setOnClickListener()
+        {
             drawerLayout.openDrawer(GravityCompat.START)
-            val toast = Toast.makeText(applicationContext, "Open Drawer", Toast.LENGTH_SHORT)
-            toast.show()
-        })
-
+        }
+    }
+    override fun onClick(name: String?) {
+        Toast.makeText(this,name,Toast.LENGTH_SHORT).show()
     }
 
-    // Adds name to the empty name ArrayList
-    private fun addList() {
-        list.add("name")
-        list.add("family")
-        list.add("card number")
-        list.add("nationality")
-        list.add("gender")
-        list.add("name")
-        list.add("family")
-        list.add("card number")
-        list.add("nationality")
-        list.add("gender")
-        list.add("name")
-        list.add("family")
-        list.add("card number")
-        list.add("nationality")
-        list.add("gender")
-
-
-    }
 }

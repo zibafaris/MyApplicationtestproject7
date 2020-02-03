@@ -16,7 +16,7 @@
         >
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/button1"
             android:text="@string/drawer_button"
             android:layout_gravity="center"
             android:layout_width="300dp"
@@ -50,7 +50,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="280dp"
             android:layout_height="match_parent"
-            android:id="@+id/rv_name_list"
+            android:id="@+id/recycler"
             />
     </LinearLayout>
 

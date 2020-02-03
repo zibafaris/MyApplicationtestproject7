@@ -1,31 +1,35 @@
 package com.example.myapplicationa1
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.name_list_item.view.*
 
-class ListAdapter(private val items : ArrayList<String>, private val context: Context) : RecyclerView.Adapter<ViewHolder>() {
-    // Inflates the item views
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.name_list_item, parent, false))
+public class ListAdapter(private val names: List<String>,
+                         private val clickListener: TestRecyclerClickListener) :
+    RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
+
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.name_list_item, parent, false)
+        return ListViewHolder(v, clickListener)
     }
 
-    // Binds each name in the ArrayList to a view
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.tvnameType.text = items[position]
-    }
+    override fun getItemCount():Int = names.size
 
-    // Gets the number of names in the list
-    override fun getItemCount(): Int {
-        return this.items.size
-    }
+    override fun onBindViewHolder(holder: ListViewHolder, position: Int) = holder.onBind(names[position])
 
+    public class ListViewHolder(
+        private val item: View,
+        private val clickListener: TestRecyclerClickListener) : RecyclerView.ViewHolder(item) {
+
+        fun onBind(name: String) {
+            item.txtName.text = name
+            item.setOnClickListener {
+                clickListener.onClick(name)
+            }
+        }
+    }
 }
 
-class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
-    // Holds the TextView that will add each name to
-    val tvnameType = view.tv_name_type
-}
